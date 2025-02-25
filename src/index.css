@@ -1,0 +1,45 @@
+*{
+  padding: 0px;
+  margin: 0px;
+}
+.auth-container form button{
+  background-color: rgb(11, 155, 212) ;
+  border: none;
+  padding: 10px;
+  border-radius  : 5px;
+  color: white;
+  border-radius:20px;
+}
+.auth-container form button:hover{
+  background-color: white;
+  color: rgb(11, 155, 212);
+  border: 1px solid rgb(11, 155, 212);
+  transition: all 0.5s ease-in-out;
+
+}
+.auth-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: fixed; /* Fix the div to the viewport */
+  top: 50%; /* Move the top edge to the vertical center */
+  left: 50%; /* Move the left edge to the horizontal center */
+  transform: translate(-50%, -50%); /* Shift the div back by half its width an  d height */
+  background-color: transparent;
+  background-color: white;
+  box-shadow: 0px 20px 10px rgb(0, 0, 0,0.4);
+  padding: 2rem 4rem;
+  border-radius: 5px;
+}
+.auth-container input{
+  padding: 10px;
+  border: none;
+  border-bottom: solid black 1px;
+}
+.auth-container form{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
