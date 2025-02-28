@@ -1,45 +1,345 @@
-*{
-  padding: 0px;
-  margin: 0px;
+/* Global Styles */
+* {
+  padding: 0;
+  margin: 0;
+  font-family: monospace;
+  box-sizing: border-box;
 }
-.auth-container form button{
-  background-color: rgb(11, 155, 212) ;
-  border: none;
-  padding: 10px;
-  border-radius  : 5px;
-  color: white;
-  border-radius:20px;
-}
-.auth-container form button:hover{
-  background-color: white;
-  color: rgb(11, 155, 212);
-  border: 1px solid rgb(11, 155, 212);
-  transition: all 0.5s ease-in-out;
 
+body {
+  background-color: black;
+  color: white;
 }
-.auth-container{
+
+/* Auth Container */
+.auth-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
-  position: fixed; /* Fix the div to the viewport */
-  top: 50%; /* Move the top edge to the vertical center */
-  left: 50%; /* Move the left edge to the horizontal center */
-  transform: translate(-50%, -50%); /* Shift the div back by half its width an  d height */
-  background-color: transparent;
-  background-color: white;
-  box-shadow: 0px 20px 10px rgb(0, 0, 0,0.4);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   padding: 2rem 4rem;
-  border-radius: 5px;
+  padding: 300px;
+
+
 }
-.auth-container input{
-  padding: 10px;
-  border: none;
-  border-bottom: solid black 1px;
-}
-.auth-container form{
+
+.auth-container form {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
+}
+
+.auth-container input {
+  padding: 10px 50px;
+  border: none;
+  background-color: #1e1e1e;
+  border-bottom: 1px solid black;
+  color: white;
+  width: 100%;
+}
+
+.auth-container form button {
+  background-color: rgb(255, 0, 0);
+  border: none;
+  padding: 10px 15px;
+  width: 100%;
+  border-radius: 10px;
+  color: rgb(12, 12, 12);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.auth-container form button:hover {
+  background-color: rgb(0, 0, 0);
+  color: red;
+  border: 1px solid red;
+  transition: all 0.5s ease-in-out;
+}
+
+/* Navbar */
+.right-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: transparent;
+  padding: 10px;
+  z-index: 1000;
+}
+
+.right-nav nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.right-nav nav ul li {
+  margin-left: 20px;
+}
+
+.a {
+  text-decoration: none;
+  color: red;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.a:hover {
+  color: transparent;
+  transition: all 0.5s ease-in-out;
+  border: none;
+}
+
+#a1:hover::before,
+#a3:hover::before,
+#a4:hover::before {
+  content: "";
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+}
+
+#a1:hover::before {
+  background-image: url('src/assets/img/home.png');
+}
+
+#a3:hover::before {
+  background-image: url('src/assets/img/games.png');
+}
+
+#a4:hover::before {
+  background-image: url('src/assets/img/user.png');
+}
+
+.right-nav nav ul li a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .right-nav nav ul {
+    flex-direction: column;
+  }
+
+  .right-nav nav ul li {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
+
+/* Video Container */
+.video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Home Container */
+.home {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.5rem;
+}
+
+/* MostPlayed Section */
+.most-played-container {
+  padding: 40px 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1;
+}
+
+.most-played-container h2 {
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.game-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Gamecard Styles */
+.game-card {
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 300px;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.game-card-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.game-card-content {
+  padding: 15px;
+  color: white;
+}
+
+.game-card-content h2 {
+  margin: 0 0 10px;
+  font-size: 1.5rem;
+}
+
+.game-card-content p {
+  margin: 0 0 15px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.game-card-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.game-card-details .price {
+  font-size: 1.2rem;
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.game-card-details .release {
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.game-card-image {
+  position: relative;
+}
+
+.game-card-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
+}
+/* Login.css */
+.main {
+  background-image: url('/src/assets/img/call-of-duty-black-8528x4798-17015.jpg'); /* Update the path */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 80vw;
+  height: 100vh;
+  display: flex;
+  /* background-blend-mode:darken ; */
+  align-items: center;
+  justify-content: center;
+  background-color: transparent; /* Keep this transparent */
+  
+}
+
+.auth-container{
+  padding: 2rem;
+  border-radius: 10px;
+  width: 100%;
+
+  max-width: 600px;
+  padding-left: 10px;
+  height: 100vh;
+  text-align: center;
+  /* background-color: #110f0f; */
+  position: relative;
+  left: 70%;
+  opacity: 100%;
+  border-radius: none;
+ margin-left: 150px;
+ border: none;
+ mix-blend-mode: lighten;
+ /* background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(3,3,3,0.9976365546218487) 9%, rgba(5,5,5,0) 100%); */
+
+background: linear-gradient(90deg, rgba(0,0,0,0.8827906162464986) 0%, rgba(3,3,3,1) 42%, rgba(5,5,5,0.9948354341736695) 100%);
+  
+
+}
+
+.auth-container h1 {
+  margin-bottom: 1rem;
+  color: white;
+}
+.sbtn{
+  background-color: transparent;
+  border: none;
+
+  object-fit: cover;
+}
+#prevbtn{
+  background-color: transparent;
+}
+.pagbtn{
+  width: 50px;
+}
+.pagbtn:hover{
+  width: 40px;
+}
+.btns{
+  display: flex;
+  justify-content: space-between;
+}
+#logout-btn{
+  color: white;
+  background-color: red;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 6px;
 }

@@ -5,25 +5,26 @@ import Button from '../utils/Button';
 import { toast, ToastContainer } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ setToken }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting},
+    formState: { errors, isSubmitting },
   } = useForm();
 
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
-      const loginRequest = await axios.post('api/auth/login', data);
-      const token = loginRequest.data.token;
+      const loginRequest = await axios.post('', data);
+      const token = loginRequest.data.access; // Access the "access" token
       if (token) {
-        localStorage.setItem('userToken', token);
+        localStorage.setItem('access', token); // Store the access token in localStorage
+        setToken(true); // Update the authentication state in the parent component
         toast.success('Login Successful');
-        navigate('/dashboard'); // Redirect to dashboard
+        navigate('/home'); // Redirect to the home page
       } else {
         toast.error('Wrong credentials');
       }
@@ -40,8 +41,7 @@ const Login = () => {
   };
 
   return (
-    <>
-    <div className='auth-container'>
+    <div className="main">
       <ToastContainer
         position="top-left"
         autoClose={5000}
@@ -53,49 +53,44 @@ const Login = () => {
         draggable
         pauseOnHover
       />
-      <h1>Login</h1>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          type="text"
-          name="user_name"
-          placeholder="Enter the user name"
-          register={register('user_name', {
-            required: { value: true, message: 'The field is required' },
-            minLength: { value: 4, message: 'Username min length is 4' },
-            maxLength: { value: 20, message: 'Username max length is 20' },
-          })}
-          error={errors.user_name}
-        />
-        <Input
-          type="email"
-          name="user_email"
-          placeholder="Enter the Email"
-          register={register('user_email', {
-            required: 'Email is required',
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Invalid email address',
-            },
-          })}
-          error={errors.user_email}
-        />
-        <Input
-          type="password"
-          placeholder="Enter the password"
-          name="password"
-          register={register('password', {
-            required: 'Password is required',
-            minLength: { value: 6, message: "Password's min length is 6 characters" },
-            maxLength: { value: 16, message: "Password's max length is 16" },
-          })}
-          error={errors.password}
-        />
+      <div className="auth-container">
+        <h1>Login</h1>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            type="text"
+            name="username"
+            placeholder="Enter the user name"
+            register={register('username', {
+              required: { value: true, message: 'The field is required' },
+              minLength: { value: 4, message: 'Username min length is 4' },
+              maxLength: { value: 20, message: 'Username max length is 20' },
+            })}
+            error={errors.username}
+          />
+          <Input
+            type="password"
+            placeholder="Enter the password"
+            name="password"
+            register={register('password', {
+              required: 'Password is required',
+              minLength: { value: 6, message: "Password must be at least 6 characters" },
+              maxLength: { value: 16, message: "Password cannot exceed 16 characters" },
+              pattern: {
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+                message:
+                  'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)',
+              },
+            })}
+            error={errors.password}
+          />
 
-       <Button type="submit" disabled={isSubmitting}> {isSubmitting ? 'Loging In...' : 'Log In'}
-       </Button>
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Logging In...' : 'Log In'}
+          </Button>
+          <h2>Don't have an account?</h2> <Link to="/signup">Create new account</Link>
         </Form>
+      </div>
     </div>
-    </>
   );
 };
 
